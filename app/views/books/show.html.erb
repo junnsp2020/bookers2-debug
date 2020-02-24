@@ -35,24 +35,34 @@
 					 		<%= @book.favorites.count %> いいね
 					 	<% end %>
 					<% end %>
+					<td>
+					    <%= @book.book_comments.count %> コメント
 				    </td>
-
 				    <td>
-				       <% @book_comments.each do |book_comment| %>
-                       <%= book_comment.comment %>
-                       <% end %>
-                    </td>
+				    	<% @book_comments.each do |book_comment| %>
+				    </td>
+				    <tr>
+				       
+                       <td><%= book_comment.comment %></td>
+
+                       <% if book_comment.user == current_user %>
+					   <td><%= button_to "Destroy",book_book_comments_path(@book.id), {method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}",params:{comment_id: book_comment.id}} %></td>
+				       <% end %>
+                       
+                    </tr>
+                    <% end %>
 
                     <%= form_for [@book, @book_comment] do |f| %>
 				    	<%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
 						<%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
 					<% end %>
 
-                    <!-- if文追加 -->
-					<% if @book.user == current_user %>
+                    <% if @book.user == current_user %>
 					<td><%= link_to "Edit",edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
 					<td><%= link_to "Destroy",book_path(@book), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}" %></td>
 				    <% end %>
+
+
 				</tr>
 			</table>
 

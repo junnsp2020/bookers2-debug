@@ -8,11 +8,14 @@ class BookCommentsController < ApplicationController
 	end
 
 	def destroy
-		book = Book.find(params[:book_id])
-		comment = current_user.book_comments.new(book_comment_params)
-		comment.book_id = book.id
-		comment.destroy
-		redirect_to request.referer
+
+		book_comment = BookComment.find(params[:comment_id])
+		 if book_comment.user != current_user
+		 	redirect_to request.referer
+		 end
+		book_comment.destroy
+		redirect_to book_path(params[:book_id])
+	end
 
 	private
 def book_comment_params

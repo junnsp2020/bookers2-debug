@@ -68,3 +68,4 @@ gem 'jquery-rails'
 
 #追加
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'pry-byebug'
