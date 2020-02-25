@@ -29,9 +29,21 @@ class UsersController < ApplicationController
   	end
   end
 
+  def follows
+    user = User.find(params[:id])
+    # @active_relationships = @user.active_relationships
+    # @users = @active_relationships.user
+    @users = user.followings
+  end
+
+  def followers
+    user = User.find(params[:id])
+    @users = user.followers
+  end
+
   private
   def user_params
-  	params.require(:user).permit(:name, :introduction, :profile_image)
+  	params.require(:user).permit(:name, :introduction, :profile_image, :user_id)
   end
 
   #url直接防止　メソッドを自己定義してbefore_actionで発動。

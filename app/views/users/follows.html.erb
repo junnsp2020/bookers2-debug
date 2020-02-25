@@ -1,0 +1,14 @@
+
+<table class="table">
+
+<% @users.each do |user| %>
+		<tr>
+			<td><%=link_to user.name, user_path(user) %></td>
+			<td><%= attachment_image_tag user, :profile_image, format: "jpeg", fallback: "no_image.jpg", size: "100x100"  %></td>
+			<%end%>
+		</tr>
+</table>
+
+<% if @users.count <= 0 %>
+  <p>ユーザーはいません</p>
+<% end %>
