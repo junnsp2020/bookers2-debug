@@ -25,11 +25,13 @@
 		<tr>
 			<td><%= attachment_image_tag user, :profile_image, format: "jpeg", fallback: "no_image.jpg", size: "100x100"  %></td>
 			<td><%= user.name %></td>
+			<td>フォロー数　<%= user.active_relationships.count %></td>
+			<td>フォロワー数　<%= user.passive_relationships.count %></td>
 			<td><% if current_user != user %>
 		          <% if user.followed_by?(current_user) %>
-		            <p><%=link_to "フォロー済み", user_relationships_path(user.id), method: :delete %></p>
+		            <p><%=link_to "フォロー済み", user_relationships_path(user.id), method: :delete, class: "btn btn-primary" %></p>
 		          <% else %>
-		            <p><%=link_to "フォローする", user_relationships_path(user.id), method: :post %></p>
+		            <p><%=link_to "フォローする", user_relationships_path(user.id), method: :post, class: "btn btn-success" %></p>
 		          <% end %>
 		        <% end %>
 		    </td>
