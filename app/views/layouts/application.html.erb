@@ -21,6 +21,7 @@
           <ul class="nav navbar-nav navbar-right">
             <!--if文でサインインとアウト時の表示を変更-->
             <% if user_signed_in? %>
+
             <li><%= link_to ' home', user_path(current_user), class: 'glyphicon glyphicon-home home' %></li>
             <li><%= link_to ' users', users_path, class: 'glyphicon glyphicon-user users' %></li>
             <li><%= link_to ' books', books_path, class: 'glyphicon glyphicon-book books' %></li>
@@ -33,13 +34,23 @@
             <% end %>
           </ul>
         </nav>
-
       </div>
     </header>
     <!--ヘッダーの記述-->
     <div class="container">
       <p id="notice"><%= notice %></p> <!--デバイスでnotice設定されているので呼び出してるだけ-->
     </div>
+
+     <% if user_signed_in? %>
+         <span class="search" style="margin-top: 70px; text-align: center;">
+           <%= form_with url: search_path, method: :get, data: {remote: false} do |f| %>
+             <%= f.text_field :"search[content]" %>
+             <%= f.select 'search[model]', options_for_select({ "User" => "user", "Book" => "book" }) %>
+              <%= f.select 'search[method]', options_for_select({ "完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial" }) %>
+             <%= f.submit :search %>
+           <% end %>
+         </span>
+     <% end %>
 
     <%= yield %>
 
