@@ -1,0 +1,16 @@
+
+<% if book.favorited_by?(current_user) %>
+
+ 	<%= link_to book_favorites_path(book), method: :delete, remote: true do %>
+ 	<script src="https://kit.fontawesome.com/8bffd370f9.js" crossorigin="anonymous"></script>
+ 		<i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+ 		<%= book.favorites.count %> いいね
+ 	<% end %>
+
+<% else %>
+ 	<%= link_to book_favorites_path(book), method: :post, remote: true do %>
+ 	<script src="https://kit.fontawesome.com/8bffd370f9.js" crossorigin="anonymous"></script>
+ 		<i class="fa fa-heart-o" aria-hidden="true"></i>
+ 		<%= book.favorites.count %> いいね
+ 	<% end %>
+<% end %>

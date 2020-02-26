@@ -1,0 +1,5 @@
+if (location.pathname == '/books') {
+  $(".book_<%= @book.id %>").html("<%= j(render 'favorites/favorite',  book: @book ) %>")
+} else {
+  $(".book_<%= @book.id %>").html("<%= j(render 'favorites/favorite',  book: book ) %>")
+}

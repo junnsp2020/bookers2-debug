@@ -13,7 +13,10 @@ before_action :authenticate_user!
   def index
   	@books = Book.all #一覧表示するためにBookモデルの情報を全てくださいのall
     @book = Book.new
+    # @bookers = Book.find(params[:id])
+    book = Book.new
     @users=User.all
+    # @user = User.find(params[:id])
   end
 
   def create
