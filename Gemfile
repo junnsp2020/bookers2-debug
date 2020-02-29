@@ -71,3 +71,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'pry-byebug'
 
 gem "jp_prefecture"
+
+gem 'dotenv-rails'
+
+gem "pry-rails"
